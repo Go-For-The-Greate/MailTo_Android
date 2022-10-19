@@ -3,7 +3,11 @@ package com.woga.mailto.write
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.woga.mailto.data.MailEntity
+import com.woga.mailto.data.MailDatabase
 import com.woga.mailto.util.Event
+import kotlinx.coroutines.launch
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -24,7 +28,11 @@ class MailWriteViewModel : ViewModel() {
         _isEmailPattern.value = matcher.matches()
     }
 
-    fun sendEmail(email: String, title: String, content: String) {
-        _event.value = Event(MailWriteEvent.Success)
+    fun sendEmail(email: String, title: String, content: String, instance: MailDatabase) {
+        viewModelScope.launch {
+            instance.mailDao().insert(MailEntity(userEmail = email, title = title, content = content))
+            _event.value = Event(MailWriteEvent.Success)
+        }
+
     }
 }

@@ -35,12 +35,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.app.ActivityCompat
+import com.woga.mailto.data.MailDatabase
 import com.woga.mailto.R
 
 class MailWriteActivity : AppCompatActivity() {
@@ -130,7 +130,7 @@ class MailWriteActivity : AppCompatActivity() {
                     onClick = {
                         showDialog = true
                         Handler(Looper.getMainLooper()).postDelayed({
-                            viewModel.sendEmail(emailText, title, content)
+                            viewModel.sendEmail(emailText, title, content, MailDatabase.getInstance(applicationContext))
                         }, 500)
                     }
                 ) {
@@ -190,7 +190,6 @@ class MailWriteActivity : AppCompatActivity() {
     }
 
     private fun showSuccessSendingMail() {
-
         Toast.makeText(this, "메일을 선공적으로 전송하였습니다!", Toast.LENGTH_SHORT).show()
         close()
     }

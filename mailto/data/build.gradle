@@ -14,5 +14,5 @@ ext {
 
 dependencies {
     //room
-    kapt "androidx.room:room-compiler:$room_version"
+    kapt("androidx.room:room-compiler:$room_version")
 }
