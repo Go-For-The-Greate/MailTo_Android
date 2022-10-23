@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.app.ActivityCompat
-import com.woga.mailto.data.MailDatabase
 import com.woga.mailto.R
 
 class MailWriteActivity : AppCompatActivity() {
@@ -130,7 +129,7 @@ class MailWriteActivity : AppCompatActivity() {
                     onClick = {
                         showDialog = true
                         Handler(Looper.getMainLooper()).postDelayed({
-                            viewModel.sendEmail(emailText, title, content, MailDatabase.getInstance(applicationContext))
+                            viewModel.sendEmail(emailText, title, content)
                         }, 500)
                     }
                 ) {

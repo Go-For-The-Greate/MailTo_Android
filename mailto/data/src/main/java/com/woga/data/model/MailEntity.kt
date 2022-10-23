@@ -1,4 +1,4 @@
-package com.woga.mailto.data
+package com.woga.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

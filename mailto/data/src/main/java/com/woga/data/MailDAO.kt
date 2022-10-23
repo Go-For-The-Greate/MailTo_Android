@@ -1,10 +1,11 @@
-package com.woga.mailto.data
+package com.woga.data
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.woga.data.model.MailEntity
 
 @Dao
 interface MailDAO {
