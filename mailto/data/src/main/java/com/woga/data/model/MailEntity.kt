@@ -10,4 +10,8 @@ data class MailEntity(
     @ColumnInfo(name = "user_email") val userEmail: String?,
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "content") val content: String?,
-)
+) {
+    fun mapper(): MailVO {
+        return MailVO(userEmail ?: "", title ?: "", content ?: "")
+    }
+}

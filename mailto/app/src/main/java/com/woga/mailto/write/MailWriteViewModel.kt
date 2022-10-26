@@ -3,11 +3,15 @@ package com.woga.mailto.write
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.woga.data.model.MailVO
+import com.woga.data.repository.MailRepository
 import com.woga.mailto.util.Event
+import kotlinx.coroutines.launch
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class MailWriteViewModel : ViewModel() {
+class MailWriteViewModel(val repository: MailRepository) : ViewModel() {
 
     private val _isEmailPattern = MutableLiveData<Boolean>()
     val isEmailPattern: LiveData<Boolean>
@@ -25,6 +29,13 @@ class MailWriteViewModel : ViewModel() {
     }
 
     fun sendEmail(email: String, title: String, content: String) {
-        _event.value = Event(MailWriteEvent.Success)
+
+        viewModelScope.launch {
+            val result = repository.insert(MailVO(email, title, content))
+            if (result.isSuccess) {
+                println("mail:: insert compelete")
+                _event.value = Event(MailWriteEvent.Success)
+            }
+        }
     }
 }

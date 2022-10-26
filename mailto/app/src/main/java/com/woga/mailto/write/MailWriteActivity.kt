@@ -45,7 +45,7 @@ import com.woga.mailto.R
 class MailWriteActivity : AppCompatActivity() {
 
 
-    private val viewModel: MailWriteViewModel by viewModels()
+    private val viewModel: MailWriteViewModel by viewModels() { MailWriteViewModelFactory(this)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
