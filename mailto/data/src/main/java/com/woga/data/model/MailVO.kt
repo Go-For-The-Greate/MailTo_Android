@@ -1,4 +1,4 @@
-package com.woga.mailto.data
+package com.woga.data.model
 
 data class MailVO(
     val email: String,
