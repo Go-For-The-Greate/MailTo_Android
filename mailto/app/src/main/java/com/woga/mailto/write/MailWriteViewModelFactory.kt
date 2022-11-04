@@ -7,6 +7,7 @@ import com.woga.data.di.DAOInjector
 import com.woga.data.di.DataSourceInjector
 import com.woga.data.di.MailDataBaseInjector
 import com.woga.data.di.RepositoryInjector
+import com.woga.mailto.util.MailSenderManager
 
 class MailWriteViewModelFactory(val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -18,7 +19,8 @@ class MailWriteViewModelFactory(val context: Context) : ViewModelProvider.Factor
                             MailDataBaseInjector.provideMailDatabase(context)
                         )
                     )
-                )
+                ),
+                MailSenderManager()
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

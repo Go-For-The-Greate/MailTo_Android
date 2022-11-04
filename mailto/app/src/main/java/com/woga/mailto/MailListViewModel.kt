@@ -14,7 +14,7 @@ class MailListViewModel(private val repository: MailRepository) : ViewModel() {
     val items: LiveData<List<MailVO>>
         get() = _items
 
-    fun init() {
+    fun getMailList() {
         viewModelScope.launch {
             val result = repository.getAll()
             if (result.isSuccess) {
