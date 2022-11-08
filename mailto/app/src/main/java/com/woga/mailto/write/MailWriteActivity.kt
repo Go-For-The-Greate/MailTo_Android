@@ -1,5 +1,6 @@
 package com.woga.mailto.write
 
+import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
@@ -35,7 +38,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.input.key.Key.Companion.I
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -76,7 +81,9 @@ class MailWriteActivity : AppCompatActivity() {
                     viewModel.checkValidEmail(it)
                     emailText = it
                 },
+                singleLine = true,
                 maxLines = 1,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 label = {
                     EmailTextViewLabel(viewModel.isEmailPattern.value ?: true)
                 },
@@ -92,6 +99,8 @@ class MailWriteActivity : AppCompatActivity() {
                 modifier = Modifier.fillMaxWidth(),
                 onValueChange = { title = it },
                 maxLines = 1,
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 label = { Text("제목") },
                 colors = getTextFieldColors(true)
             )
@@ -190,6 +199,7 @@ class MailWriteActivity : AppCompatActivity() {
 
     private fun showSuccessSendingMail() {
         Toast.makeText(this, "메일을 선공적으로 전송하였습니다!", Toast.LENGTH_SHORT).show()
+        setResult(Activity.RESULT_OK)
         close()
     }
 
